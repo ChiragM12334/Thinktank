@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import Stroop from "./games/Stroop";
 
 function App() {
   const [screen, setScreen] = useState("home");
@@ -68,9 +69,9 @@ function App() {
             className="name-input"
             placeholder="Your name"
             value={playerName}
-            onChange={(event) =>
-              setPlayerName(event.target.value)
-            }
+            onChange={(event) => {
+              setPlayerName(event.target.value);
+            }}
           />
 
           <button
@@ -197,12 +198,12 @@ function App() {
       )}
 
       {/* =========================
-          CHALLENGE SCREEN
+          STROOP CHALLENGE SCREEN
       ========================== */}
       {screen === "challenge" && (
         <div className="game-screen">
 
-          {/* Header */}
+          {/* Game Header */}
           <div className="game-header">
 
             <span>
@@ -230,24 +231,10 @@ function App() {
 
           </div>
 
-          {/* Challenge Card */}
+          {/* Stroop Game */}
           <div className="game-card">
 
-            <p className="task-label">
-              STROOP CHALLENGE
-            </p>
-
-            <h1>
-              Get Ready...
-            </h1>
-
-            <p>
-              Your first cognitive challenge will start here.
-            </p>
-
-            <div className="challenge-placeholder">
-              Stroop Challenge Area
-            </div>
+            <Stroop />
 
           </div>
 
