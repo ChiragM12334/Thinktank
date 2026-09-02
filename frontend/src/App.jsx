@@ -1,195 +1,342 @@
 import { useState } from "react";
 import "./App.css";
+
 import Stroop from "./games/Stroop";
+import Memory from "./games/Memory";
+import Pattern from "./games/Pattern";
+
+function responseCount(data) {
+  if (Array.isArray(data)) {
+    return data.length;
+  }
+
+  if (data?.questions) {
+    return data.questions.length;
+  }
+
+  return 0;
+}
 
 function App() {
-  const [screen, setScreen] = useState("home");
-  const [playerName, setPlayerName] = useState("");
+  const [screen, setScreen] =
+    useState("home");
+
+  const [playerName, setPlayerName] =
+    useState("");
+
+  const [mindset, setMindset] =
+    useState("");
+
+  const [gameSession, setGameSession] =
+    useState({
+      playerName: "",
+      mindset: "",
+      stroop: [],
+      memory: [],
+      pattern: [],
+      risk: [],
+      pressure: [],
+      dilemma: [],
+    });
 
   const handleNameSubmit = () => {
-    if (playerName.trim() === "") {
+    const name =
+      playerName.trim();
+
+    if (!name) {
       return;
     }
 
-    setScreen("instructions");
+    setGameSession(
+      (previous) => ({
+        ...previous,
+        playerName: name,
+      })
+    );
+
+    setScreen("mindset");
+  };
+
+  const handleMindset = (
+    selectedMindset
+  ) => {
+    setMindset(
+      selectedMindset
+    );
+
+    setGameSession(
+      (previous) => ({
+        ...previous,
+        mindset:
+          selectedMindset,
+      })
+    );
+
+    setScreen("briefing");
+  };
+
+  const handleStroopComplete = (
+    data
+  ) => {
+    console.log(
+      "COLOR TRAP DATA:",
+      data
+    );
+
+    setGameSession(
+      (previous) => ({
+        ...previous,
+        stroop:
+          data?.questions ||
+          data ||
+          [],
+      })
+    );
+
+    setScreen("memory-intro");
+  };
+
+  const handleMemoryComplete = (
+    data
+  ) => {
+    console.log(
+      "MEMORY TRAP DATA:",
+      data
+    );
+
+    setGameSession(
+      (previous) => ({
+        ...previous,
+        memory:
+          data || [],
+      })
+    );
+
+    setScreen("pattern-intro");
+  };
+
+  const handlePatternComplete = (
+    data
+  ) => {
+    console.log(
+      "LOGIC SHIFT DATA:",
+      data
+    );
+
+    setGameSession(
+      (previous) => ({
+        ...previous,
+        pattern:
+          data?.questions ||
+          data ||
+          [],
+      })
+    );
+
+    setScreen(
+      "three-rounds-complete"
+    );
+  };
+
+  const showSessionData = () => {
+    console.log(
+      "================================"
+    );
+
+    console.log(
+      "THINKTANK SESSION"
+    );
+
+    console.log(
+      "================================"
+    );
+
+    console.log(gameSession);
   };
 
   return (
     <div className="app">
 
-      {/* =========================
-          HOME SCREEN
-      ========================== */}
-      {screen === "home" && (
-        <div className="home-screen">
+      {/* =================================
+          HOME
+      ================================= */}
 
-          <div className="logo">
-            ThinkTank
+      {screen === "home" && (
+        <div className="landing-screen">
+
+          <div className="eyebrow">
+            AI • COGNITION • ADAPTATION
           </div>
 
-          <h1>
-            Challenge Your Mind
+          <h1 className="main-title">
+            ThinkTank
           </h1>
 
-          <p className="description">
-            Test your memory, speed, pattern recognition,
-            decision making and performance under pressure.
+          <p className="hero-line">
+            Every mind leaves a pattern.
+          </p>
+
+          <p className="hero-description">
+            A series of challenges designed to
+            see how you think, react and adapt.
           </p>
 
           <button
-            className="start-button"
-            onClick={() => setScreen("name")}
+            className="primary-button"
+            onClick={() =>
+              setScreen("name")
+            }
           >
-            Start Game
+            ENTER THINKTANK →
           </button>
 
         </div>
       )}
 
-      {/* =========================
-          PLAYER NAME SCREEN
-      ========================== */}
-      {screen === "name" && (
-        <div className="home-screen">
+      {/* =================================
+          NAME
+      ================================= */}
 
-          <div className="logo">
-            ThinkTank
+      {screen === "name" && (
+        <div className="onboarding-screen">
+
+          <div className="eyebrow">
+            FIRST IMPRESSION
           </div>
 
           <h1>
-            Enter Your Name
+            Before we begin...
           </h1>
 
-          <p className="description">
-            Before we begin, tell us what we should call you.
+          <p className="onboarding-text">
+            Your next few minutes may reveal
+            more about how you respond than you expect.
+          </p>
+
+          <p className="question-label">
+            What should we call you?
           </p>
 
           <input
             type="text"
             className="name-input"
-            placeholder="Your name"
+            placeholder="Type your name..."
             value={playerName}
-            onChange={(event) => {
-              setPlayerName(event.target.value);
+            onChange={(event) =>
+              setPlayerName(
+                event.target.value
+              )
+            }
+            onKeyDown={(event) => {
+              if (
+                event.key === "Enter"
+              ) {
+                handleNameSubmit();
+              }
             }}
           />
 
           <button
-            className="start-button"
-            onClick={handleNameSubmit}
+            className="primary-button"
+            onClick={
+              handleNameSubmit
+            }
           >
-            Continue
+            THAT'S ME →
           </button>
 
         </div>
       )}
 
-      {/* =========================
-          INSTRUCTIONS SCREEN
-      ========================== */}
-      {screen === "instructions" && (
-        <div className="home-screen">
+      {/* =================================
+          MINDSET
+      ================================= */}
 
-          <div className="logo">
-            ThinkTank
+      {screen === "mindset" && (
+        <div className="onboarding-screen">
+
+          <div className="eyebrow">
+            NICE TO MEET YOU,{" "}
+            {playerName.toUpperCase()}
           </div>
 
           <h1>
-            How It Works
+            How are you entering ThinkTank?
           </h1>
 
-          <p className="description">
-            Welcome, {playerName}.
-            You will complete six different cognitive
-            challenges. Your accuracy, reaction time
-            and decisions will be observed during the game.
+          <p className="onboarding-text">
+            No answer is better than another.
+            Pick what feels most natural.
           </p>
 
-          <div className="instruction-list">
-
-            <div>
-              🧠 Memory & Pattern Recognition
-            </div>
-
-            <div>
-              ⚡ Reaction Speed
-            </div>
-
-            <div>
-              🎯 Decision Making
-            </div>
-
-            <div>
-              ⏱ Performance Under Time Pressure
-            </div>
-
-          </div>
-
-          <button
-            className="start-button"
-            onClick={() => setScreen("game")}
-          >
-            Begin Challenge
-          </button>
-
-        </div>
-      )}
-
-      {/* =========================
-          GET READY / GAME SCREEN
-      ========================== */}
-      {screen === "game" && (
-        <div className="game-screen">
-
-          {/* Game Header */}
-          <div className="game-header">
-
-            <span>
-              ThinkTank
-            </span>
-
-            <span>
-              Player: {playerName}
-            </span>
-
-            <span>
-              Round 1 / 6
-            </span>
-
-          </div>
-
-          {/* Progress Bar */}
-          <div className="progress-container">
-
-            <div className="progress-bar">
-
-              <div className="progress-fill"></div>
-
-            </div>
-
-          </div>
-
-          {/* Game Card */}
-          <div className="game-card">
-
-            <p className="task-label">
-              FIRST CHALLENGE
-            </p>
-
-            <h1>
-              Get Ready!
-            </h1>
-
-            <p>
-              Focus carefully. Your first challenge will
-              measure how quickly and accurately you respond.
-            </p>
+          <div className="mindset-grid">
 
             <button
-              className="start-button"
-              onClick={() => setScreen("challenge")}
+              className="mindset-card"
+              onClick={() =>
+                handleMindset(
+                  "Curious"
+                )
+              }
             >
-              Start Challenge
+              <span>01</span>
+              <strong>
+                Curious
+              </strong>
+              <small>
+                I want to explore.
+              </small>
+            </button>
+
+            <button
+              className="mindset-card"
+              onClick={() =>
+                handleMindset(
+                  "Competitive"
+                )
+              }
+            >
+              <span>02</span>
+              <strong>
+                Competitive
+              </strong>
+              <small>
+                I want to win.
+              </small>
+            </button>
+
+            <button
+              className="mindset-card"
+              onClick={() =>
+                handleMindset(
+                  "Chill"
+                )
+              }
+            >
+              <span>03</span>
+              <strong>
+                Chill
+              </strong>
+              <small>
+                Let's see what happens.
+              </small>
+            </button>
+
+            <button
+              className="mindset-card"
+              onClick={() =>
+                handleMindset(
+                  "Unpredictable"
+                )
+              }
+            >
+              <span>04</span>
+              <strong>
+                Unpredictable
+              </strong>
+              <small>
+                Surprise me.
+              </small>
             </button>
 
           </div>
@@ -197,46 +344,416 @@ function App() {
         </div>
       )}
 
-      {/* =========================
-          STROOP CHALLENGE SCREEN
-      ========================== */}
-      {screen === "challenge" && (
-        <div className="game-screen">
+      {/* =================================
+          BRIEFING
+      ================================= */}
 
-          {/* Game Header */}
-          <div className="game-header">
+      {screen === "briefing" && (
+        <div className="onboarding-screen">
 
-            <span>
-              ThinkTank
-            </span>
-
-            <span>
-              Player: {playerName}
-            </span>
-
-            <span>
-              Round 1 / 6
-            </span>
-
+          <div className="eyebrow">
+            THINKTANK // INITIAL BRIEFING
           </div>
 
-          {/* Progress Bar */}
-          <div className="progress-container">
+          <h1>
+            Don't overthink it.
+          </h1>
 
-            <div className="progress-bar">
+          <p className="onboarding-text">
+            Six different ways to think.
+            Speed, memory, logic, risk and pressure.
+          </p>
 
-              <div className="progress-fill"></div>
+          <div className="briefing-list">
 
+            <div>
+              <span>01</span>
+              <p>COLOR TRAP</p>
+            </div>
+
+            <div>
+              <span>02</span>
+              <p>MEMORY TRAP</p>
+            </div>
+
+            <div>
+              <span>03</span>
+              <p>LOGIC SHIFT</p>
+            </div>
+
+            <div>
+              <span>04</span>
+              <p>RISK DECISION</p>
+            </div>
+
+            <div>
+              <span>05</span>
+              <p>TIME PRESSURE</p>
+            </div>
+
+            <div>
+              <span>06</span>
+              <p>FINAL DECISION</p>
             </div>
 
           </div>
 
-          {/* Stroop Game */}
-          <div className="game-card">
+          <p className="warning-text">
+            Some rounds change the rules.
+            Pay attention.
+          </p>
 
-            <Stroop />
+          <button
+            className="primary-button"
+            onClick={() =>
+              setScreen("game")
+            }
+          >
+            ENTER THE ARENA →
+          </button>
+
+        </div>
+      )}
+
+      {/* =================================
+          ROUND 1 INTRO
+      ================================= */}
+
+      {screen === "game" && (
+        <div className="round-screen">
+
+          <div className="round-topbar">
+            <span>THINKTANK</span>
+            <span>01 / 06</span>
+          </div>
+
+          <div className="round-progress">
+            <div
+              className="round-progress-fill"
+              style={{
+                width: "16.66%",
+              }}
+            />
+          </div>
+
+          <div className="round-intro-card">
+
+            <div className="round-number">
+              ROUND 01
+            </div>
+
+            <h1>
+              COLOR TRAP
+            </h1>
+
+            <p>
+              Read carefully.
+              The rules may not stay the same.
+            </p>
+
+            <button
+              className="primary-button"
+              onClick={() =>
+                setScreen("challenge")
+              }
+            >
+              START ROUND →
+            </button>
 
           </div>
+
+        </div>
+      )}
+
+      {/* =================================
+          ROUND 1
+      ================================= */}
+
+      {screen === "challenge" && (
+        <div className="round-screen">
+
+          <div className="round-topbar">
+            <span>THINKTANK</span>
+            <span>01 / 06</span>
+          </div>
+
+          <div className="round-progress">
+            <div
+              className="round-progress-fill"
+              style={{
+                width: "16.66%",
+              }}
+            />
+          </div>
+
+          <div className="game-card">
+
+            <Stroop
+              onComplete={
+                handleStroopComplete
+              }
+            />
+
+          </div>
+
+        </div>
+      )}
+
+      {/* =================================
+          ROUND 2 INTRO
+      ================================= */}
+
+      {screen === "memory-intro" && (
+        <div className="round-screen">
+
+          <div className="round-topbar">
+            <span>THINKTANK</span>
+            <span>02 / 06</span>
+          </div>
+
+          <div className="round-progress">
+            <div
+              className="round-progress-fill"
+              style={{
+                width: "33.33%",
+              }}
+            />
+          </div>
+
+          <div className="round-intro-card">
+
+            <div className="round-number">
+              ROUND 02
+            </div>
+
+            <h1>
+              MEMORY TRAP
+            </h1>
+
+            <p>
+              Objects disappear.
+              Positions shift.
+              Your memory has to keep up.
+            </p>
+
+            <button
+              className="primary-button"
+              onClick={() =>
+                setScreen("memory")
+              }
+            >
+              START ROUND →
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
+      {/* =================================
+          ROUND 2
+      ================================= */}
+
+      {screen === "memory" && (
+        <div className="round-screen">
+
+          <div className="round-topbar">
+            <span>THINKTANK</span>
+            <span>02 / 06</span>
+          </div>
+
+          <div className="round-progress">
+            <div
+              className="round-progress-fill"
+              style={{
+                width: "33.33%",
+              }}
+            />
+          </div>
+
+          <div className="game-card">
+
+            <Memory
+              onComplete={
+                handleMemoryComplete
+              }
+            />
+
+          </div>
+
+        </div>
+      )}
+
+      {/* =================================
+          ROUND 3 INTRO
+      ================================= */}
+
+      {screen === "pattern-intro" && (
+        <div className="round-screen">
+
+          <div className="round-topbar">
+            <span>THINKTANK</span>
+            <span>03 / 06</span>
+          </div>
+
+          <div className="round-progress">
+            <div
+              className="round-progress-fill"
+              style={{
+                width: "50%",
+              }}
+            />
+          </div>
+
+          <div className="round-intro-card">
+
+            <div className="round-number">
+              ROUND 03
+            </div>
+
+            <h1>
+              LOGIC SHIFT
+            </h1>
+
+            <p>
+              The pattern is hiding something.
+              Find the rule before it changes.
+            </p>
+
+            <button
+              className="primary-button"
+              onClick={() =>
+                setScreen("pattern")
+              }
+            >
+              START ROUND →
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
+      {/* =================================
+          ROUND 3
+      ================================= */}
+
+      {screen === "pattern" && (
+        <div className="round-screen">
+
+          <div className="round-topbar">
+            <span>THINKTANK</span>
+            <span>03 / 06</span>
+          </div>
+
+          <div className="round-progress">
+            <div
+              className="round-progress-fill"
+              style={{
+                width: "50%",
+              }}
+            />
+          </div>
+
+          <div className="game-card">
+
+            <Pattern
+              onComplete={
+                handlePatternComplete
+              }
+            />
+
+          </div>
+
+        </div>
+      )}
+
+      {/* =================================
+          SUMMARY
+      ================================= */}
+
+      {screen ===
+        "three-rounds-complete" && (
+        <div className="summary-screen">
+
+          <div className="eyebrow">
+            FIRST THREE ROUNDS COMPLETE
+          </div>
+
+          <h1>
+            Nice run, {playerName}.
+          </h1>
+
+          <p className="summary-text">
+            You've survived attention,
+            memory and logic.
+            The rest gets harder.
+          </p>
+
+          <div className="summary-grid">
+
+            <div className="summary-card">
+              <span>01</span>
+              <strong>
+                COLOR TRAP
+              </strong>
+              <small>
+                {
+                  responseCount(
+                    gameSession.stroop
+                  )
+                }{" "}
+                responses
+              </small>
+            </div>
+
+            <div className="summary-card">
+              <span>02</span>
+              <strong>
+                MEMORY TRAP
+              </strong>
+              <small>
+                {
+                  responseCount(
+                    gameSession.memory
+                  )
+                }{" "}
+                responses
+              </small>
+            </div>
+
+            <div className="summary-card">
+              <span>03</span>
+              <strong>
+                LOGIC SHIFT
+              </strong>
+              <small>
+                {
+                  responseCount(
+                    gameSession.pattern
+                  )
+                }{" "}
+                responses
+              </small>
+            </div>
+
+          </div>
+
+          <div className="summary-mindset">
+            Entered as:
+            <strong>
+              {mindset}
+            </strong>
+          </div>
+
+          <button
+            className="secondary-button"
+            onClick={
+              showSessionData
+            }
+          >
+            VIEW DATA IN CONSOLE
+          </button>
 
         </div>
       )}
