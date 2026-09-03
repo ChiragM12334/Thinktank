@@ -4,6 +4,7 @@ import "./App.css";
 import Stroop from "./games/Stroop";
 import Memory from "./games/Memory";
 import Pattern from "./games/Pattern";
+import Lab from "./games/Lab";
 
 function responseCount(data) {
   if (Array.isArray(data)) {
@@ -18,148 +19,134 @@ function responseCount(data) {
 }
 
 function App() {
-  const [screen, setScreen] =
-    useState("home");
+  const [screen, setScreen] = useState("home");
 
-  const [playerName, setPlayerName] =
-    useState("");
+  const [playerName, setPlayerName] = useState("");
+  const [mindset, setMindset] = useState("");
 
-  const [mindset, setMindset] =
-    useState("");
+  const [gameSession, setGameSession] = useState({
+    playerName: "",
+    mindset: "",
+    stroop: [],
+    memory: [],
+    pattern: [],
+    lab: [],
+    risk: [],
+    pressure: [],
+    dilemma: [],
+  });
 
-  const [gameSession, setGameSession] =
-    useState({
-      playerName: "",
-      mindset: "",
-      stroop: [],
-      memory: [],
-      pattern: [],
-      risk: [],
-      pressure: [],
-      dilemma: [],
-    });
+  // =========================================
+  // NAME
+  // =========================================
 
   const handleNameSubmit = () => {
-    const name =
-      playerName.trim();
+    const name = playerName.trim();
 
     if (!name) {
       return;
     }
 
-    setGameSession(
-      (previous) => ({
-        ...previous,
-        playerName: name,
-      })
-    );
+    setGameSession((previous) => ({
+      ...previous,
+      playerName: name,
+    }));
 
     setScreen("mindset");
   };
 
-  const handleMindset = (
-    selectedMindset
-  ) => {
-    setMindset(
-      selectedMindset
-    );
+  // =========================================
+  // MINDSET
+  // =========================================
 
-    setGameSession(
-      (previous) => ({
-        ...previous,
-        mindset:
-          selectedMindset,
-      })
-    );
+  const handleMindset = (selectedMindset) => {
+    setMindset(selectedMindset);
+
+    setGameSession((previous) => ({
+      ...previous,
+      mindset: selectedMindset,
+    }));
 
     setScreen("briefing");
   };
 
-  const handleStroopComplete = (
-    data
-  ) => {
-    console.log(
-      "COLOR TRAP DATA:",
-      data
-    );
+  // =========================================
+  // ROUND 1 — COLOR TRAP
+  // =========================================
 
-    setGameSession(
-      (previous) => ({
-        ...previous,
-        stroop:
-          data?.questions ||
-          data ||
-          [],
-      })
-    );
+  const handleStroopComplete = (data) => {
+    console.log("COLOR TRAP DATA:", data);
+
+    setGameSession((previous) => ({
+      ...previous,
+      stroop: data?.questions || data || [],
+    }));
 
     setScreen("memory-intro");
   };
 
-  const handleMemoryComplete = (
-    data
-  ) => {
-    console.log(
-      "MEMORY TRAP DATA:",
-      data
-    );
+  // =========================================
+  // ROUND 2 — MEMORY TRAP
+  // =========================================
 
-    setGameSession(
-      (previous) => ({
-        ...previous,
-        memory:
-          data || [],
-      })
-    );
+  const handleMemoryComplete = (data) => {
+    console.log("MEMORY TRAP DATA:", data);
+
+    setGameSession((previous) => ({
+      ...previous,
+      memory: data || [],
+    }));
 
     setScreen("pattern-intro");
   };
 
-  const handlePatternComplete = (
-    data
-  ) => {
-    console.log(
-      "LOGIC SHIFT DATA:",
-      data
-    );
+  // =========================================
+  // ROUND 3 — LOGIC SHIFT
+  // =========================================
 
-    setGameSession(
-      (previous) => ({
-        ...previous,
-        pattern:
-          data?.questions ||
-          data ||
-          [],
-      })
-    );
+  const handlePatternComplete = (data) => {
+    console.log("LOGIC SHIFT DATA:", data);
 
-    setScreen(
-      "three-rounds-complete"
-    );
+    setGameSession((previous) => ({
+      ...previous,
+      pattern: data?.questions || data || [],
+    }));
+
+    setScreen("lab-intro");
   };
 
+  // =========================================
+  // ROUND 4 — THE LAB
+  // =========================================
+
+  const handleLabComplete = (data) => {
+    console.log("THE LAB DATA:", data);
+
+    setGameSession((previous) => ({
+      ...previous,
+      lab: data || [],
+    }));
+
+    setScreen("lab-complete");
+  };
+
+  // =========================================
+  // SESSION DEBUG
+  // =========================================
+
   const showSessionData = () => {
-    console.log(
-      "================================"
-    );
-
-    console.log(
-      "THINKTANK SESSION"
-    );
-
-    console.log(
-      "================================"
-    );
-
+    console.log("================================");
+    console.log("THINKTANK SESSION");
+    console.log("================================");
     console.log(gameSession);
   };
 
   return (
     <div className="app">
 
-      {/* =================================
+      {/* ======================================
           HOME
-      ================================= */}
+      ====================================== */}
 
       {screen === "home" && (
         <div className="landing-screen">
@@ -183,9 +170,7 @@ function App() {
 
           <button
             className="primary-button"
-            onClick={() =>
-              setScreen("name")
-            }
+            onClick={() => setScreen("name")}
           >
             ENTER THINKTANK →
           </button>
@@ -193,9 +178,9 @@ function App() {
         </div>
       )}
 
-      {/* =================================
+      {/* ======================================
           NAME
-      ================================= */}
+      ====================================== */}
 
       {screen === "name" && (
         <div className="onboarding-screen">
@@ -223,14 +208,10 @@ function App() {
             placeholder="Type your name..."
             value={playerName}
             onChange={(event) =>
-              setPlayerName(
-                event.target.value
-              )
+              setPlayerName(event.target.value)
             }
             onKeyDown={(event) => {
-              if (
-                event.key === "Enter"
-              ) {
+              if (event.key === "Enter") {
                 handleNameSubmit();
               }
             }}
@@ -238,9 +219,7 @@ function App() {
 
           <button
             className="primary-button"
-            onClick={
-              handleNameSubmit
-            }
+            onClick={handleNameSubmit}
           >
             THAT'S ME →
           </button>
@@ -248,9 +227,9 @@ function App() {
         </div>
       )}
 
-      {/* =================================
+      {/* ======================================
           MINDSET
-      ================================= */}
+      ====================================== */}
 
       {screen === "mindset" && (
         <div className="onboarding-screen">
@@ -273,70 +252,40 @@ function App() {
 
             <button
               className="mindset-card"
-              onClick={() =>
-                handleMindset(
-                  "Curious"
-                )
-              }
+              onClick={() => handleMindset("Curious")}
             >
               <span>01</span>
-              <strong>
-                Curious
-              </strong>
-              <small>
-                I want to explore.
-              </small>
+              <strong>Curious</strong>
+              <small>I want to explore.</small>
             </button>
 
             <button
               className="mindset-card"
-              onClick={() =>
-                handleMindset(
-                  "Competitive"
-                )
-              }
+              onClick={() => handleMindset("Competitive")}
             >
               <span>02</span>
-              <strong>
-                Competitive
-              </strong>
-              <small>
-                I want to win.
-              </small>
+              <strong>Competitive</strong>
+              <small>I want to win.</small>
             </button>
 
             <button
               className="mindset-card"
-              onClick={() =>
-                handleMindset(
-                  "Chill"
-                )
-              }
+              onClick={() => handleMindset("Chill")}
             >
               <span>03</span>
-              <strong>
-                Chill
-              </strong>
-              <small>
-                Let's see what happens.
-              </small>
+              <strong>Chill</strong>
+              <small>Let's see what happens.</small>
             </button>
 
             <button
               className="mindset-card"
               onClick={() =>
-                handleMindset(
-                  "Unpredictable"
-                )
+                handleMindset("Unpredictable")
               }
             >
               <span>04</span>
-              <strong>
-                Unpredictable
-              </strong>
-              <small>
-                Surprise me.
-              </small>
+              <strong>Unpredictable</strong>
+              <small>Surprise me.</small>
             </button>
 
           </div>
@@ -344,9 +293,9 @@ function App() {
         </div>
       )}
 
-      {/* =================================
+      {/* ======================================
           BRIEFING
-      ================================= */}
+      ====================================== */}
 
       {screen === "briefing" && (
         <div className="onboarding-screen">
@@ -361,7 +310,7 @@ function App() {
 
           <p className="onboarding-text">
             Six different ways to think.
-            Speed, memory, logic, risk and pressure.
+            Speed, memory, logic, investigation and pressure.
           </p>
 
           <div className="briefing-list">
@@ -383,7 +332,7 @@ function App() {
 
             <div>
               <span>04</span>
-              <p>RISK DECISION</p>
+              <p>THE LAB</p>
             </div>
 
             <div>
@@ -405,9 +354,7 @@ function App() {
 
           <button
             className="primary-button"
-            onClick={() =>
-              setScreen("game")
-            }
+            onClick={() => setScreen("game")}
           >
             ENTER THE ARENA →
           </button>
@@ -415,9 +362,9 @@ function App() {
         </div>
       )}
 
-      {/* =================================
+      {/* ======================================
           ROUND 1 INTRO
-      ================================= */}
+      ====================================== */}
 
       {screen === "game" && (
         <div className="round-screen">
@@ -430,9 +377,7 @@ function App() {
           <div className="round-progress">
             <div
               className="round-progress-fill"
-              style={{
-                width: "16.66%",
-              }}
+              style={{ width: "16.66%" }}
             />
           </div>
 
@@ -453,9 +398,7 @@ function App() {
 
             <button
               className="primary-button"
-              onClick={() =>
-                setScreen("challenge")
-              }
+              onClick={() => setScreen("challenge")}
             >
               START ROUND →
             </button>
@@ -465,9 +408,9 @@ function App() {
         </div>
       )}
 
-      {/* =================================
-          ROUND 1
-      ================================= */}
+      {/* ======================================
+          ROUND 1 — COLOR TRAP
+      ====================================== */}
 
       {screen === "challenge" && (
         <div className="round-screen">
@@ -480,18 +423,14 @@ function App() {
           <div className="round-progress">
             <div
               className="round-progress-fill"
-              style={{
-                width: "16.66%",
-              }}
+              style={{ width: "16.66%" }}
             />
           </div>
 
           <div className="game-card">
 
             <Stroop
-              onComplete={
-                handleStroopComplete
-              }
+              onComplete={handleStroopComplete}
             />
 
           </div>
@@ -499,9 +438,9 @@ function App() {
         </div>
       )}
 
-      {/* =================================
+      {/* ======================================
           ROUND 2 INTRO
-      ================================= */}
+      ====================================== */}
 
       {screen === "memory-intro" && (
         <div className="round-screen">
@@ -514,9 +453,7 @@ function App() {
           <div className="round-progress">
             <div
               className="round-progress-fill"
-              style={{
-                width: "33.33%",
-              }}
+              style={{ width: "33.33%" }}
             />
           </div>
 
@@ -538,9 +475,7 @@ function App() {
 
             <button
               className="primary-button"
-              onClick={() =>
-                setScreen("memory")
-              }
+              onClick={() => setScreen("memory")}
             >
               START ROUND →
             </button>
@@ -550,9 +485,9 @@ function App() {
         </div>
       )}
 
-      {/* =================================
-          ROUND 2
-      ================================= */}
+      {/* ======================================
+          ROUND 2 — MEMORY
+      ====================================== */}
 
       {screen === "memory" && (
         <div className="round-screen">
@@ -565,18 +500,14 @@ function App() {
           <div className="round-progress">
             <div
               className="round-progress-fill"
-              style={{
-                width: "33.33%",
-              }}
+              style={{ width: "33.33%" }}
             />
           </div>
 
           <div className="game-card">
 
             <Memory
-              onComplete={
-                handleMemoryComplete
-              }
+              onComplete={handleMemoryComplete}
             />
 
           </div>
@@ -584,9 +515,9 @@ function App() {
         </div>
       )}
 
-      {/* =================================
+      {/* ======================================
           ROUND 3 INTRO
-      ================================= */}
+      ====================================== */}
 
       {screen === "pattern-intro" && (
         <div className="round-screen">
@@ -599,9 +530,7 @@ function App() {
           <div className="round-progress">
             <div
               className="round-progress-fill"
-              style={{
-                width: "50%",
-              }}
+              style={{ width: "50%" }}
             />
           </div>
 
@@ -622,9 +551,7 @@ function App() {
 
             <button
               className="primary-button"
-              onClick={() =>
-                setScreen("pattern")
-              }
+              onClick={() => setScreen("pattern")}
             >
               START ROUND →
             </button>
@@ -634,9 +561,9 @@ function App() {
         </div>
       )}
 
-      {/* =================================
-          ROUND 3
-      ================================= */}
+      {/* ======================================
+          ROUND 3 — LOGIC SHIFT
+      ====================================== */}
 
       {screen === "pattern" && (
         <div className="round-screen">
@@ -649,18 +576,14 @@ function App() {
           <div className="round-progress">
             <div
               className="round-progress-fill"
-              style={{
-                width: "50%",
-              }}
+              style={{ width: "50%" }}
             />
           </div>
 
           <div className="game-card">
 
             <Pattern
-              onComplete={
-                handlePatternComplete
-              }
+              onComplete={handlePatternComplete}
             />
 
           </div>
@@ -668,26 +591,151 @@ function App() {
         </div>
       )}
 
-      {/* =================================
-          SUMMARY
-      ================================= */}
+      {/* ======================================
+          ROUND 4 INTRO — THE LAB
+      ====================================== */}
 
-      {screen ===
-        "three-rounds-complete" && (
+      {screen === "lab-intro" && (
+        <div className="round-screen">
+
+          <div className="round-topbar">
+            <span>THINKTANK</span>
+            <span>04 / 06</span>
+          </div>
+
+          <div className="round-progress">
+            <div
+              className="round-progress-fill"
+              style={{ width: "66.66%" }}
+            />
+          </div>
+
+          <div className="round-intro-card">
+
+            <div className="round-number">
+              ROUND 04
+            </div>
+
+            <h1>
+              THE LAB
+            </h1>
+
+            <p>
+              Investigate.
+              Build.
+              Adapt.
+            </p>
+
+            <button
+              className="primary-button"
+              onClick={() => setScreen("lab")}
+            >
+              ENTER THE LAB →
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
+      {/* ======================================
+          ROUND 4 — THE LAB
+      ====================================== */}
+
+      {screen === "lab" && (
+        <div className="round-screen">
+
+          <div className="round-topbar">
+            <span>THINKTANK</span>
+            <span>04 / 06</span>
+          </div>
+
+          <div className="round-progress">
+            <div
+              className="round-progress-fill"
+              style={{ width: "66.66%" }}
+            />
+          </div>
+
+          <div className="game-card">
+
+            <Lab
+              onComplete={handleLabComplete}
+            />
+
+          </div>
+
+        </div>
+      )}
+
+      {/* ======================================
+          ROUND 4 COMPLETE
+      ====================================== */}
+
+      {screen === "lab-complete" && (
+        <div className="round-screen">
+
+          <div className="round-topbar">
+            <span>THINKTANK</span>
+            <span>04 / 06</span>
+          </div>
+
+          <div className="round-progress">
+            <div
+              className="round-progress-fill"
+              style={{ width: "66.66%" }}
+            />
+          </div>
+
+          <div className="round-intro-card">
+
+            <div className="round-number">
+              ROUND 04 COMPLETE
+            </div>
+
+            <h1>
+              THE LAB
+            </h1>
+
+            <p>
+              You investigated the problem,
+              built a plan and adapted when
+              the situation changed.
+            </p>
+
+            <button
+              className="primary-button"
+              onClick={() => {
+                setScreen("future");
+              }}
+            >
+              CONTINUE →
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
+      {/* ======================================
+          TEMPORARY FUTURE SCREEN
+      ====================================== */}
+
+      {screen === "future" && (
         <div className="summary-screen">
 
           <div className="eyebrow">
-            FIRST THREE ROUNDS COMPLETE
+            ROUND 05
           </div>
 
           <h1>
-            Nice run, {playerName}.
+            More is coming.
           </h1>
 
           <p className="summary-text">
-            You've survived attention,
-            memory and logic.
-            The rest gets harder.
+            The next challenge will push
+            ThinkTank into a different kind
+            of pressure.
           </p>
 
           <div className="summary-grid">
@@ -698,12 +746,9 @@ function App() {
                 COLOR TRAP
               </strong>
               <small>
-                {
-                  responseCount(
-                    gameSession.stroop
-                  )
-                }{" "}
-                responses
+                {responseCount(
+                  gameSession.stroop
+                )} responses
               </small>
             </div>
 
@@ -713,12 +758,9 @@ function App() {
                 MEMORY TRAP
               </strong>
               <small>
-                {
-                  responseCount(
-                    gameSession.memory
-                  )
-                }{" "}
-                responses
+                {responseCount(
+                  gameSession.memory
+                )} responses
               </small>
             </div>
 
@@ -728,12 +770,21 @@ function App() {
                 LOGIC SHIFT
               </strong>
               <small>
-                {
-                  responseCount(
-                    gameSession.pattern
-                  )
-                }{" "}
-                responses
+                {responseCount(
+                  gameSession.pattern
+                )} responses
+              </small>
+            </div>
+
+            <div className="summary-card">
+              <span>04</span>
+              <strong>
+                THE LAB
+              </strong>
+              <small>
+                {responseCount(
+                  gameSession.lab
+                ) || "Complete"} 
               </small>
             </div>
 
@@ -741,16 +792,12 @@ function App() {
 
           <div className="summary-mindset">
             Entered as:
-            <strong>
-              {mindset}
-            </strong>
+            <strong>{mindset}</strong>
           </div>
 
           <button
             className="secondary-button"
-            onClick={
-              showSessionData
-            }
+            onClick={showSessionData}
           >
             VIEW DATA IN CONSOLE
           </button>
