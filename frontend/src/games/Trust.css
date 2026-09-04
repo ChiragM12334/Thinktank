@@ -1,0 +1,1407 @@
+/* =========================================================
+   THINKTANK — ROUND 05 / TRUST
+   Fully scoped stylesheet
+   ========================================================= */
+
+.trust-shell {
+  --trust-bg: #070910;
+  --trust-panel: rgba(11, 15, 25, 0.95);
+  --trust-panel-soft: rgba(255, 255, 255, 0.025);
+  --trust-border: rgba(255, 255, 255, 0.09);
+
+  --trust-text: #f4f5f8;
+  --trust-soft: #9aa2b4;
+  --trust-muted: #6f788b;
+
+  --trust-accent: #9b8fff;
+  --trust-accent-soft: rgba(139, 124, 255, 0.07);
+
+  --trust-success: #35d07f;
+  --trust-danger: #ff6680;
+  --trust-warning: #e4c54c;
+
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  color: var(--trust-text);
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 17% 12%,
+      rgba(139, 124, 255, 0.10),
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 85% 82%,
+      rgba(66, 94, 255, 0.055),
+      transparent 29%
+    ),
+    var(--trust-bg);
+}
+
+.trust-shell *,
+.trust-shell *::before,
+.trust-shell *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.trust-shell .trust-card {
+  width: min(1040px, 100%);
+
+  border:
+    1px solid var(--trust-border);
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.012)
+    ),
+    var(--trust-panel);
+
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.42),
+    inset 0 1px rgba(255, 255, 255, 0.025);
+
+  overflow: hidden;
+
+  backdrop-filter: blur(20px);
+}
+
+
+/* =========================================================
+   BRIEFING
+   ========================================================= */
+
+.trust-shell .trust-briefing {
+  min-height: 680px;
+
+  padding: 68px 56px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.trust-shell .trust-eyebrow {
+  color: var(--trust-accent);
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.trust-shell .trust-title {
+  margin: 20px 0 0;
+
+  max-width: 900px;
+
+  color: var(--trust-text);
+
+  font-family: inherit;
+
+  font-size:
+    clamp(54px, 8vw, 94px);
+
+  line-height: 0.86;
+
+  letter-spacing: -0.075em;
+
+  font-weight: 950;
+}
+
+.trust-shell .trust-description {
+  width: min(650px, 100%);
+
+  margin: 23px auto 0;
+
+  color: var(--trust-soft);
+
+  font-size: 14px;
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   BRIEFING RULES
+   ========================================================= */
+
+.trust-shell .trust-rules {
+  width: min(820px, 100%);
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 36px;
+}
+
+.trust-shell .trust-rules > div {
+  min-height: 135px;
+
+  padding: 19px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  text-align: left;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.trust-shell .trust-rules > div:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(139, 124, 255, 0.34);
+
+  background:
+    rgba(139, 124, 255, 0.05);
+}
+
+.trust-shell .trust-rules span {
+  color: var(--trust-accent);
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.1em;
+}
+
+.trust-shell .trust-rules strong {
+  display: block;
+
+  margin-top: 11px;
+
+  color: #eceef4;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.09em;
+}
+
+.trust-shell .trust-rules small {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #737c8f;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+}
+
+.trust-shell .trust-warning {
+  margin-top: 22px;
+
+  color: #70798b;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.trust-shell .trust-primary {
+  min-height: 47px;
+
+  margin-top: 26px;
+
+  padding:
+    0 22px;
+
+  border: none;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #9d91ff,
+      #725fff
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.095em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 15px 32px
+    rgba(114, 95, 255, 0.23);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.trust-shell .trust-primary:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 19px 38px
+    rgba(114, 95, 255, 0.31);
+}
+
+.trust-shell .trust-primary:active {
+  transform: translateY(0);
+}
+
+.trust-shell .trust-primary:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   MAIN SCREEN
+   ========================================================= */
+
+.trust-shell .trust-main {
+  min-height: 680px;
+
+  padding: 30px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.trust-shell .trust-topbar {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.trust-shell .trust-mini-label {
+  color: #6e778a;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.17em;
+}
+
+.trust-shell .trust-name {
+  margin-top: 5px;
+
+  color: #eff0f5;
+
+  font-size: 20px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.04em;
+}
+
+.trust-shell .trust-phase {
+  color: #858ea1;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+}
+
+.trust-shell .trust-top-progress {
+  width: 100%;
+
+  height: 4px;
+
+  margin-top: 19px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+}
+
+.trust-shell .trust-top-progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #7565ff,
+      #aaa0ff
+    );
+
+  transition:
+    width 0.3s ease;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.trust-shell .trust-heading {
+  width: min(760px, 100%);
+
+  margin: 40px auto 0;
+
+  text-align: center;
+}
+
+.trust-shell .trust-heading > span {
+  color: #988cff;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.16em;
+}
+
+.trust-shell .trust-heading h1 {
+  margin: 12px 0 0;
+
+  color: #f2f3f7;
+
+  font-family: inherit;
+
+  font-size:
+    clamp(31px, 5vw, 50px);
+
+  line-height: 1;
+
+  letter-spacing: -0.055em;
+
+  font-weight: 950;
+}
+
+.trust-shell .trust-heading p {
+  width: min(600px, 100%);
+
+  margin: 13px auto 0;
+
+  color: #8d95a8;
+
+  font-size: 13px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   AGENTS
+   ========================================================= */
+
+.trust-shell .agent-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 32px;
+}
+
+.trust-shell .agent-card {
+  min-height: 205px;
+
+  padding: 16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 17px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #f2f3f7;
+
+  font-family: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.trust-shell .agent-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(139, 124, 255, 0.33);
+
+  background:
+    rgba(139, 124, 255, 0.05);
+}
+
+.trust-shell .agent-selected {
+  border-color:
+    rgba(139, 124, 255, 0.56);
+
+  background:
+    rgba(139, 124, 255, 0.075);
+
+  box-shadow:
+    inset 0 2px 0 rgba(139, 124, 255, 0.55);
+}
+
+.trust-shell .agent-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.trust-shell .agent-avatar {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 38px;
+
+  border:
+    1px solid;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,255,255,0.025);
+
+  font-size: 12px;
+
+  font-weight: 900;
+}
+
+.trust-shell .agent-identity strong {
+  display: block;
+
+  color: #f0f1f5;
+
+  font-size: 12px;
+}
+
+.trust-shell .agent-identity small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #6f788c;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.07em;
+}
+
+.trust-shell .agent-card > p {
+  margin: 24px 0 0;
+
+  color: #9aa2b4;
+
+  font-size: 10px;
+
+  line-height: 1.65;
+}
+
+.trust-shell .agent-focus {
+  margin-top: 17px;
+
+  color: #9388ff;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   BOTTOM
+   ========================================================= */
+
+.trust-shell .trust-bottom {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  margin-top: 25px;
+}
+
+.trust-shell .trust-bottom > span {
+  color: #6f788b;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+.trust-shell .trust-bottom .trust-primary {
+  margin-top: 0;
+}
+
+
+/* =========================================================
+   CLUES
+   ========================================================= */
+
+.trust-shell .clue-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 11px;
+
+  margin-top: 31px;
+}
+
+.trust-shell .clue-card {
+  min-height: 210px;
+
+  padding: 17px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 17px;
+
+  background:
+    rgba(255,255,255,0.025);
+
+  color: #f2f3f7;
+
+  font-family: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.trust-shell .clue-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(139,124,255,0.34);
+
+  background:
+    rgba(139,124,255,0.05);
+}
+
+.trust-shell .clue-selected {
+  border-color:
+    rgba(139,124,255,0.55);
+
+  background:
+    rgba(139,124,255,0.07);
+}
+
+.trust-shell .clue-inspected {
+  box-shadow:
+    inset 0 2px 0
+    rgba(53,208,127,0.55);
+}
+
+.trust-shell .clue-icon {
+  color: #a59aff;
+
+  font-size: 20px;
+}
+
+.trust-shell .clue-card strong {
+  display: block;
+
+  margin-top: 22px;
+
+  color: #eceef4;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.06em;
+}
+
+.trust-shell .clue-card p {
+  margin: 14px 0 0;
+
+  color: #aab1c0;
+
+  font-size: 10px;
+
+  line-height: 1.6;
+}
+
+.trust-shell .clue-card > span {
+  display: block;
+
+  margin-top: 13px;
+
+  color: var(--trust-success);
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   TRUST MAP
+   ========================================================= */
+
+.trust-shell .trust-map {
+  width: min(760px, 100%);
+
+  display: grid;
+
+  gap: 11px;
+
+  margin: 30px auto 0;
+}
+
+.trust-shell .trust-person {
+  padding: 15px 17px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 15px;
+
+  background:
+    rgba(255,255,255,0.025);
+}
+
+.trust-shell .trust-person-top {
+  display: grid;
+
+  grid-template-columns:
+    38px 1fr auto;
+
+  align-items: center;
+
+  gap: 11px;
+}
+
+.trust-shell .small-avatar {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid;
+
+  border-radius: 50%;
+
+  font-size: 11px;
+
+  font-weight: 900;
+}
+
+.trust-shell .trust-person-top strong {
+  display: block;
+
+  color: #eceef3;
+
+  font-size: 11px;
+}
+
+.trust-shell .trust-person-top small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #70798b;
+
+  font-size: 8px;
+
+  letter-spacing: 0.06em;
+}
+
+.trust-shell .trust-value {
+  color: #aaa0ff !important;
+
+  font-size: 16px !important;
+}
+
+.trust-shell .trust-person input[type="range"] {
+  width: 100%;
+
+  margin-top: 13px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   NOTE
+   ========================================================= */
+
+.trust-shell .trust-note {
+  width: fit-content;
+
+  margin: 22px auto 0;
+
+  padding: 9px 12px;
+
+  border:
+    1px solid rgba(255,255,255,0.07);
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,0.025);
+
+  color: #7a8396;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   GROUP VOTE
+   ========================================================= */
+
+.trust-shell .group-reveal {
+  min-height: 350px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+.trust-shell .group-lock > div {
+  width: 85px;
+  height: 85px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(139,124,255,0.28);
+
+  border-radius: 50%;
+
+  background:
+    rgba(139,124,255,0.07);
+
+  color: #a196ff;
+
+  font-size: 34px;
+
+  font-weight: 900;
+
+  box-shadow:
+    0 0 35px
+    rgba(139,124,255,0.08);
+}
+
+.trust-shell .group-lock strong {
+  display: block;
+
+  margin-top: 20px;
+
+  color: #e9ebf1;
+
+  font-size: 11px;
+
+  letter-spacing: 0.12em;
+}
+
+.trust-shell .group-lock small {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #70798a;
+
+  font-size: 10px;
+}
+
+.trust-shell .group-vote-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 34px;
+}
+
+.trust-shell .group-vote-card {
+  padding: 17px 12px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 14px;
+
+  background:
+    rgba(255,255,255,0.025);
+
+  text-align: center;
+}
+
+.trust-shell .group-vote-card > span {
+  display: block;
+
+  color: #e9ebf0;
+
+  font-size: 11px;
+
+  font-weight: 900;
+}
+
+.trust-shell .group-vote-card small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #697287;
+
+  font-size: 8px;
+}
+
+.trust-shell .group-vote-card strong {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #a399ff;
+
+  font-size: 10px;
+
+  letter-spacing: 0.08em;
+}
+
+.trust-shell .group-vote-traitor {
+  border-color:
+    rgba(255,102,128,0.26);
+}
+
+.trust-shell .majority-message {
+  width: min(520px, 100%);
+
+  margin: 24px auto 0;
+
+  padding: 16px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 14px;
+
+  background:
+    rgba(255,255,255,0.025);
+
+  text-align: center;
+}
+
+.trust-shell .majority-message span {
+  display: block;
+
+  color: #6f788b;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+}
+
+.trust-shell .majority-message strong {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #ff758d;
+
+  font-size: 18px;
+
+  letter-spacing: 0.05em;
+}
+
+.trust-shell .majority-message small {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #858ea1;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FINAL ACCUSATION
+   ========================================================= */
+
+.trust-shell .final-agents {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 34px;
+}
+
+.trust-shell .final-agent {
+  min-height: 165px;
+
+  padding: 18px 12px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 17px;
+
+  background:
+    rgba(255,255,255,0.025);
+
+  color: white;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.trust-shell .final-agent:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(139,124,255,0.38);
+
+  background:
+    rgba(139,124,255,0.06);
+}
+
+.trust-shell .final-agent-selected {
+  border-color:
+    rgba(139,124,255,0.62);
+
+  background:
+    rgba(139,124,255,0.08);
+
+  box-shadow:
+    inset 0 2px 0
+    rgba(139,124,255,0.55);
+}
+
+.trust-shell .final-avatar {
+  width: 47px;
+  height: 47px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid;
+
+  border-radius: 50%;
+
+  font-size: 14px;
+
+  font-weight: 900;
+}
+
+.trust-shell .final-agent strong {
+  margin-top: 12px;
+
+  color: #eceef3;
+
+  font-size: 11px;
+}
+
+.trust-shell .final-agent small {
+  margin-top: 4px;
+
+  color: #70798b;
+
+  font-size: 8px;
+}
+
+.trust-shell .final-lock {
+  width: min(450px, 100%);
+
+  margin: 25px auto 0;
+
+  padding: 16px;
+
+  border:
+    1px solid rgba(139,124,255,0.22);
+
+  border-radius: 15px;
+
+  background:
+    rgba(139,124,255,0.045);
+
+  text-align: center;
+}
+
+.trust-shell .final-lock > span {
+  color: #6f788c;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.14em;
+}
+
+.trust-shell .final-lock > strong {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #eceef5;
+
+  font-size: 19px;
+
+  letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+.trust-shell .trust-result {
+  min-height: 680px;
+
+  padding: 52px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.trust-shell .trust-result-title {
+  margin: 15px 0 0;
+
+  color: #f4f5f8;
+
+  font-family: inherit;
+
+  font-size:
+    clamp(42px, 7vw, 72px);
+
+  line-height: 0.94;
+
+  letter-spacing: -0.06em;
+
+  font-weight: 950;
+}
+
+.trust-shell .trust-result .trust-description strong {
+  color: #f0b5c0;
+}
+
+.trust-shell .trust-result-grid {
+  width: min(760px, 100%);
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 32px;
+}
+
+.trust-shell .trust-result-box {
+  padding: 18px 10px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 14px;
+
+  background:
+    rgba(255,255,255,0.025);
+}
+
+.trust-shell .trust-result-box span {
+  display: block;
+
+  color: #656e81;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.09em;
+}
+
+.trust-shell .trust-result-box strong {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #edf0f5;
+
+  font-size: 17px;
+
+  font-weight: 900;
+}
+
+.trust-shell .trust-observation {
+  width: min(650px, 100%);
+
+  margin-top: 23px;
+
+  padding: 17px 18px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 14px;
+
+  background:
+    rgba(255,255,255,0.025);
+}
+
+.trust-shell .trust-observation span {
+  color: #9085ff;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.14em;
+}
+
+.trust-shell .trust-observation p {
+  margin: 8px 0 0;
+
+  color: #8d96a8;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .trust-shell .trust-rules {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .trust-shell .agent-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .trust-shell .clue-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .trust-shell .group-vote-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .trust-shell .final-agents {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .trust-shell {
+    padding: 14px;
+  }
+
+  .trust-shell .trust-main {
+    padding: 24px 18px;
+  }
+
+  .trust-shell .trust-briefing {
+    min-height: 600px;
+    padding: 48px 22px;
+  }
+
+  .trust-shell .trust-bottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .trust-shell .trust-bottom .trust-primary {
+    width: 100%;
+  }
+
+  .trust-shell .agent-grid,
+  .trust-shell .clue-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-shell .group-vote-grid,
+  .trust-shell .final-agents {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .trust-shell .trust-result {
+    padding: 38px 20px;
+  }
+
+  .trust-shell .trust-result-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .trust-shell .trust-title {
+    font-size: 48px;
+  }
+
+  .trust-shell .trust-rules {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-shell .group-vote-grid,
+  .trust-shell .final-agents,
+  .trust-shell .trust-result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-shell .agent-card {
+    min-height: 170px;
+  }
+}
