@@ -1,0 +1,684 @@
+/* =========================================================
+   NOVA — THINKTANK AI COMPANION
+========================================================= */
+
+.nova-wrapper {
+  position: fixed;
+  right: 28px;
+  bottom: 24px;
+  width: 240px;
+  z-index: 9999;
+  pointer-events: none;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* =========================================================
+   MESSAGE BUBBLE
+========================================================= */
+
+.nova-message {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 13px 15px 13px 18px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px 15px 6px 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 23, 34, 0.96),
+      rgba(11, 13, 20, 0.96)
+    );
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.4),
+    0 0 35px rgba(143, 131, 255, 0.08);
+
+  backdrop-filter: blur(18px);
+
+  animation: nova-message-in 0.45s ease both;
+}
+
+.nova-message::after {
+  content: "";
+
+  position: absolute;
+  right: 18px;
+  bottom: -6px;
+
+  width: 11px;
+  height: 11px;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  background: #11141d;
+
+  transform: rotate(45deg);
+}
+
+.nova-message-dot {
+  width: 6px;
+  height: 6px;
+
+  margin-top: 5px;
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: #8f83ff;
+  box-shadow: 0 0 10px rgba(143, 131, 255, 0.75);
+
+  animation: nova-dot-pulse 1.8s ease-in-out infinite;
+}
+
+.nova-message-text {
+  color: rgba(245, 246, 250, 0.94);
+
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.nova-typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 16px;
+}
+
+.nova-typing i {
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #8f83ff;
+
+  animation: nova-typing 1.1s infinite ease-in-out;
+}
+
+.nova-typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.nova-typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* =========================================================
+   CHARACTER
+========================================================= */
+
+.nova-character {
+  position: relative;
+
+  width: 112px;
+  height: 116px;
+
+  margin-left: auto;
+  margin-right: 10px;
+
+  animation:
+    nova-float 4s ease-in-out infinite,
+    nova-character-in 0.55s ease both;
+}
+
+.nova-glow {
+  position: absolute;
+
+  width: 92px;
+  height: 92px;
+
+  left: 10px;
+  top: 14px;
+
+  border-radius: 50%;
+
+  background: rgba(143, 131, 255, 0.14);
+
+  filter: blur(23px);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.nova-body {
+  position: absolute;
+
+  width: 78px;
+  height: 92px;
+
+  left: 17px;
+  top: 8px;
+}
+
+/* =========================================================
+   HEAD
+========================================================= */
+
+.nova-head {
+  position: absolute;
+
+  left: 6px;
+  top: 0;
+
+  width: 66px;
+  height: 54px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 21px 21px 17px 17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #232838,
+      #111520
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 25px rgba(0, 0, 0, 0.35);
+
+  overflow: hidden;
+}
+
+.nova-head::before {
+  content: "";
+
+  position: absolute;
+
+  width: 25px;
+  height: 12px;
+
+  top: 7px;
+  right: 6px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  filter: blur(4px);
+}
+
+.nova-face {
+  position: absolute;
+
+  left: 9px;
+  right: 9px;
+  top: 16px;
+  bottom: 9px;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0a0d14,
+      #10141e
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nova-eye {
+  position: absolute;
+
+  width: 9px;
+  height: 9px;
+
+  top: 11px;
+
+  border-radius: 50%;
+
+  background: #dcd9ff;
+
+  box-shadow:
+    0 0 8px rgba(143, 131, 255, 0.85),
+    0 0 15px rgba(143, 131, 255, 0.35);
+
+  transition:
+    transform 0.2s ease,
+    height 0.15s ease;
+}
+
+.nova-eye-left {
+  left: 12px;
+}
+
+.nova-eye-right {
+  right: 12px;
+}
+
+.nova-eye.nova-blink {
+  height: 2px;
+  border-radius: 3px;
+  transform: translateY(4px);
+}
+
+.nova-mouth {
+  position: absolute;
+
+  left: 50%;
+  bottom: 8px;
+
+  width: 13px;
+  height: 5px;
+
+  border-bottom: 2px solid rgba(220, 217, 255, 0.8);
+  border-radius: 0 0 10px 10px;
+
+  transform: translateX(-50%);
+}
+
+.nova-head-line {
+  position: absolute;
+
+  left: 50%;
+  bottom: -1px;
+
+  width: 28px;
+  height: 2px;
+
+  transform: translateX(-50%);
+
+  border-radius: 4px;
+
+  background: rgba(143, 131, 255, 0.7);
+
+  box-shadow: 0 0 8px rgba(143, 131, 255, 0.5);
+}
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.nova-neck {
+  position: absolute;
+
+  left: 34px;
+  top: 51px;
+
+  width: 10px;
+  height: 9px;
+
+  border-radius: 4px;
+
+  background: #1a1e2b;
+}
+
+.nova-core {
+  position: absolute;
+
+  left: 22px;
+  top: 55px;
+
+  width: 42px;
+  height: 31px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 13px 13px 10px 10px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #1d2230,
+      #111520
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 9px 18px rgba(0, 0, 0, 0.3);
+}
+
+.nova-core-ring {
+  position: absolute;
+
+  width: 17px;
+  height: 17px;
+
+  left: 50%;
+  top: 50%;
+
+  border: 1px solid rgba(143, 131, 255, 0.7);
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  box-shadow:
+    0 0 12px rgba(143, 131, 255, 0.2);
+}
+
+.nova-core-dot {
+  position: absolute;
+
+  width: 5px;
+  height: 5px;
+
+  left: 50%;
+  top: 50%;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background: #8f83ff;
+
+  box-shadow:
+    0 0 10px rgba(143, 131, 255, 0.9);
+}
+
+/* =========================================================
+   ARMS
+========================================================= */
+
+.nova-arm {
+  position: absolute;
+
+  top: 63px;
+
+  width: 7px;
+  height: 24px;
+
+  border-radius: 999px;
+
+  background: #1b2030;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nova-arm-left {
+  left: 10px;
+  transform: rotate(17deg);
+}
+
+.nova-arm-right {
+  right: 10px;
+  transform: rotate(-17deg);
+}
+
+/* =========================================================
+   BASE
+========================================================= */
+
+.nova-base {
+  position: absolute;
+
+  left: 11px;
+  bottom: -3px;
+
+  width: 56px;
+  height: 10px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #252b3a,
+      #171b27
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  box-shadow:
+    0 7px 16px rgba(0, 0, 0, 0.35);
+}
+
+.nova-base-light {
+  position: absolute;
+
+  left: 50%;
+  top: 3px;
+
+  width: 18px;
+  height: 2px;
+
+  border-radius: 999px;
+
+  transform: translateX(-50%);
+
+  background: #8f83ff;
+
+  box-shadow:
+    0 0 9px rgba(143, 131, 255, 0.8);
+}
+
+/* =========================================================
+   SHADOW
+========================================================= */
+
+.nova-shadow {
+  position: absolute;
+
+  left: 50%;
+  bottom: -4px;
+
+  width: 65px;
+  height: 10px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  filter: blur(5px);
+
+  z-index: -1;
+}
+
+/* =========================================================
+   NAMEPLATE
+========================================================= */
+
+.nova-nameplate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  margin-top: -1px;
+  margin-right: 13px;
+
+  animation: nova-name-in 0.65s ease both;
+}
+
+.nova-nameplate span {
+  color: rgba(245, 246, 250, 0.95);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+}
+
+.nova-nameplate small {
+  margin-top: 3px;
+
+  color: rgba(150, 157, 173, 0.85);
+
+  font-size: 7px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+}
+
+/* =========================================================
+   EXPRESSIONS
+========================================================= */
+
+.nova-thinking .nova-eye {
+  transform: translateY(1px) scaleY(0.8);
+}
+
+.nova-thinking .nova-mouth {
+  width: 9px;
+  height: 2px;
+  border-bottom-width: 2px;
+  border-radius: 0;
+}
+
+.nova-alert .nova-glow {
+  background: rgba(255, 109, 135, 0.15);
+  transform: scale(1.1);
+}
+
+.nova-alert .nova-base-light {
+  background: #ff6d87;
+  box-shadow: 0 0 10px rgba(255, 109, 135, 0.8);
+}
+
+.nova-alert .nova-head-line {
+  background: #ff6d87;
+  box-shadow: 0 0 10px rgba(255, 109, 135, 0.7);
+}
+
+.nova-happy .nova-mouth {
+  width: 17px;
+  height: 7px;
+}
+
+.nova-happy .nova-glow {
+  background: rgba(53, 208, 127, 0.13);
+}
+
+.nova-happy .nova-base-light {
+  background: #35d07f;
+  box-shadow: 0 0 10px rgba(53, 208, 127, 0.75);
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes nova-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes nova-character-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes nova-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes nova-name-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nova-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes nova-typing {
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+  .nova-wrapper {
+    right: 14px;
+    bottom: 14px;
+    width: 205px;
+  }
+
+  .nova-message {
+    padding: 11px 13px 11px 15px;
+  }
+
+  .nova-message-text {
+    font-size: 11px;
+  }
+
+  .nova-character {
+    transform: scale(0.9);
+    transform-origin: bottom right;
+  }
+
+  .nova-nameplate {
+    margin-right: 7px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nova-wrapper {
+    width: 180px;
+  }
+
+  .nova-character {
+    transform: scale(0.78);
+    transform-origin: bottom right;
+  }
+
+  .nova-message-text {
+    font-size: 10px;
+  }
+}
