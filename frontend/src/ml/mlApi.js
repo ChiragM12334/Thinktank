@@ -1,8 +1,6 @@
-const ML_API_URL = "http://127.0.0.1:8000";
-
-/* =========================================================
-   THINKTANK — ML API CLIENT
-========================================================= */
+const ML_API_URL =
+  import.meta.env.VITE_ML_API_URL ||
+  "http://127.0.0.1:8000";
 
 export const predictBehaviorProfile = async (
   numericFeatures
@@ -12,12 +10,9 @@ export const predictBehaviorProfile = async (
       `${ML_API_URL}/predict`,
       {
         method: "POST",
-
         headers: {
-          "Content-Type":
-            "application/json",
+          "Content-Type": "application/json",
         },
-
         body: JSON.stringify({
           features: numericFeatures,
         }),
@@ -30,8 +25,7 @@ export const predictBehaviorProfile = async (
       );
     }
 
-    const result =
-      await response.json();
+    const result = await response.json();
 
     console.log(
       "THINKTANK ML PREDICTION:",
