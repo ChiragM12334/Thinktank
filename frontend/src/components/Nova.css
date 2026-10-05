@@ -9,6 +9,7 @@
   width: 240px;
   z-index: 9999;
   pointer-events: none;
+
   font-family:
     Inter,
     ui-sans-serif,
@@ -20,7 +21,7 @@
 }
 
 /* =========================================================
-   MESSAGE BUBBLE
+   MESSAGE
 ========================================================= */
 
 .nova-message {
@@ -39,8 +40,8 @@
   background:
     linear-gradient(
       145deg,
-      rgba(20, 23, 34, 0.96),
-      rgba(11, 13, 20, 0.96)
+      rgba(20, 23, 34, 0.97),
+      rgba(11, 13, 20, 0.97)
     );
 
   box-shadow:
@@ -49,21 +50,26 @@
 
   backdrop-filter: blur(18px);
 
-  animation: nova-message-in 0.45s ease both;
+  animation:
+    nova-message-in 0.45s ease both;
 }
 
 .nova-message::after {
   content: "";
 
   position: absolute;
+
   right: 18px;
   bottom: -6px;
 
   width: 11px;
   height: 11px;
 
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-right:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.1);
 
   background: #11141d;
 
@@ -75,18 +81,23 @@
   height: 6px;
 
   margin-top: 5px;
+
   flex: 0 0 auto;
 
   border-radius: 50%;
 
   background: #8f83ff;
-  box-shadow: 0 0 10px rgba(143, 131, 255, 0.75);
 
-  animation: nova-dot-pulse 1.8s ease-in-out infinite;
+  box-shadow:
+    0 0 10px rgba(143, 131, 255, 0.75);
+
+  animation:
+    nova-dot-pulse 1.8s ease-in-out infinite;
 }
 
 .nova-message-text {
-  color: rgba(245, 246, 250, 0.94);
+  color:
+    rgba(245, 246, 250, 0.95);
 
   font-size: 12px;
   line-height: 1.5;
@@ -108,7 +119,8 @@
 
   background: #8f83ff;
 
-  animation: nova-typing 1.1s infinite ease-in-out;
+  animation:
+    nova-typing 1.1s infinite ease-in-out;
 }
 
 .nova-typing i:nth-child(2) {
@@ -140,21 +152,23 @@
 .nova-glow {
   position: absolute;
 
-  width: 92px;
-  height: 92px;
+  width: 94px;
+  height: 94px;
 
-  left: 10px;
-  top: 14px;
+  left: 9px;
+  top: 12px;
 
   border-radius: 50%;
 
-  background: rgba(143, 131, 255, 0.14);
+  background:
+    rgba(143, 131, 255, 0.15);
 
   filter: blur(23px);
 
   transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+    background 0.25s ease,
+    transform 0.3s ease,
+    opacity 0.25s ease;
 }
 
 .nova-body {
@@ -180,8 +194,11 @@
   width: 66px;
   height: 54px;
 
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 21px 21px 17px 17px;
+  border:
+    1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius:
+    21px 21px 17px 17px;
 
   background:
     linear-gradient(
@@ -191,10 +208,17 @@
     );
 
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 10px 25px rgba(0, 0, 0, 0.35);
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.08),
+    0 10px 25px
+      rgba(0, 0, 0, 0.35);
 
   overflow: hidden;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
 .nova-head::before {
@@ -210,7 +234,8 @@
 
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.08);
+  background:
+    rgba(255, 255, 255, 0.08);
 
   filter: blur(4px);
 }
@@ -232,43 +257,123 @@
       #10141e
     );
 
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  transition:
+    border-color 0.25s ease;
 }
+
+/* =========================================================
+   EYEBROWS
+========================================================= */
+
+.nova-brow {
+  position: absolute;
+
+  top: 7px;
+
+  width: 12px;
+  height: 2px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(220, 217, 255, 0.85);
+
+  transition:
+    transform 0.25s ease,
+    top 0.25s ease,
+    background 0.25s ease;
+}
+
+.nova-brow-left {
+  left: 11px;
+}
+
+.nova-brow-right {
+  right: 11px;
+}
+
+/* =========================================================
+   EYES
+========================================================= */
 
 .nova-eye {
   position: absolute;
 
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
 
-  top: 11px;
+  top: 13px;
 
   border-radius: 50%;
 
-  background: #dcd9ff;
+  background:
+    #e4e1ff;
 
   box-shadow:
-    0 0 8px rgba(143, 131, 255, 0.85),
-    0 0 15px rgba(143, 131, 255, 0.35);
+    0 0 8px rgba(143, 131, 255, 0.9),
+    0 0 16px rgba(143, 131, 255, 0.35);
 
   transition:
-    transform 0.2s ease,
-    height 0.15s ease;
+    width 0.22s ease,
+    height 0.22s ease,
+    top 0.22s ease,
+    transform 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 .nova-eye-left {
-  left: 12px;
+  left: 11px;
 }
 
 .nova-eye-right {
-  right: 12px;
+  right: 11px;
+}
+
+.nova-pupil {
+  position: absolute;
+
+  width: 4px;
+  height: 4px;
+
+  left: 50%;
+  top: 50%;
+
+  border-radius: 50%;
+
+  background: #10131b;
+
+  transform:
+    translate(-50%, -50%);
+
+  transition:
+    transform 0.25s ease;
 }
 
 .nova-eye.nova-blink {
   height: 2px;
+
   border-radius: 3px;
-  transform: translateY(4px);
+
+  transform:
+    translateY(4px);
+
+  box-shadow:
+    0 0 5px
+      rgba(143, 131, 255, 0.4);
 }
+
+.nova-eye.nova-blink
+  .nova-pupil {
+  opacity: 0;
+}
+
+/* =========================================================
+   MOUTH
+========================================================= */
 
 .nova-mouth {
   position: absolute;
@@ -279,10 +384,21 @@
   width: 13px;
   height: 5px;
 
-  border-bottom: 2px solid rgba(220, 217, 255, 0.8);
-  border-radius: 0 0 10px 10px;
+  transform:
+    translateX(-50%);
 
-  transform: translateX(-50%);
+  border-bottom:
+    2px solid rgba(220, 217, 255, 0.8);
+
+  border-radius:
+    0 0 10px 10px;
+
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    border 0.25s ease,
+    border-radius 0.25s ease,
+    transform 0.25s ease;
 }
 
 .nova-head-line {
@@ -294,13 +410,20 @@
   width: 28px;
   height: 2px;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   border-radius: 4px;
 
-  background: rgba(143, 131, 255, 0.7);
+  background:
+    rgba(143, 131, 255, 0.7);
 
-  box-shadow: 0 0 8px rgba(143, 131, 255, 0.5);
+  box-shadow:
+    0 0 8px rgba(143, 131, 255, 0.5);
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 /* =========================================================
@@ -330,8 +453,11 @@
   width: 42px;
   height: 31px;
 
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 13px 13px 10px 10px;
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius:
+    13px 13px 10px 10px;
 
   background:
     linear-gradient(
@@ -341,8 +467,10 @@
     );
 
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 9px 18px rgba(0, 0, 0, 0.3);
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.06),
+    0 9px 18px
+      rgba(0, 0, 0, 0.3);
 }
 
 .nova-core-ring {
@@ -354,13 +482,17 @@
   left: 50%;
   top: 50%;
 
-  border: 1px solid rgba(143, 131, 255, 0.7);
+  border:
+    1px solid rgba(143, 131, 255, 0.7);
+
   border-radius: 50%;
 
-  transform: translate(-50%, -50%);
+  transform:
+    translate(-50%, -50%);
 
   box-shadow:
-    0 0 12px rgba(143, 131, 255, 0.2);
+    0 0 12px
+      rgba(143, 131, 255, 0.2);
 }
 
 .nova-core-dot {
@@ -374,12 +506,18 @@
 
   border-radius: 50%;
 
-  transform: translate(-50%, -50%);
+  transform:
+    translate(-50%, -50%);
 
   background: #8f83ff;
 
   box-shadow:
-    0 0 10px rgba(143, 131, 255, 0.9);
+    0 0 10px
+      rgba(143, 131, 255, 0.9);
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 /* =========================================================
@@ -398,7 +536,11 @@
 
   background: #1b2030;
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform 0.25s ease;
 }
 
 .nova-arm-left {
@@ -433,10 +575,12 @@
       #171b27
     );
 
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
 
   box-shadow:
-    0 7px 16px rgba(0, 0, 0, 0.35);
+    0 7px 16px
+      rgba(0, 0, 0, 0.35);
 }
 
 .nova-base-light {
@@ -450,12 +594,19 @@
 
   border-radius: 999px;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   background: #8f83ff;
 
   box-shadow:
-    0 0 9px rgba(143, 131, 255, 0.8);
+    0 0 9px
+      rgba(143, 131, 255, 0.8);
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    width 0.25s ease;
 }
 
 /* =========================================================
@@ -471,11 +622,13 @@
   width: 65px;
   height: 10px;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   border-radius: 50%;
 
-  background: rgba(0, 0, 0, 0.4);
+  background:
+    rgba(0, 0, 0, 0.4);
 
   filter: blur(5px);
 
@@ -494,11 +647,13 @@
   margin-top: -1px;
   margin-right: 13px;
 
-  animation: nova-name-in 0.65s ease both;
+  animation:
+    nova-name-in 0.65s ease both;
 }
 
 .nova-nameplate span {
-  color: rgba(245, 246, 250, 0.95);
+  color:
+    rgba(245, 246, 250, 0.95);
 
   font-size: 10px;
   font-weight: 800;
@@ -509,7 +664,8 @@
 .nova-nameplate small {
   margin-top: 3px;
 
-  color: rgba(150, 157, 173, 0.85);
+  color:
+    rgba(150, 157, 173, 0.85);
 
   font-size: 7px;
   font-weight: 700;
@@ -518,47 +674,247 @@
 }
 
 /* =========================================================
-   EXPRESSIONS
+   🤖 HAPPY
 ========================================================= */
 
-.nova-thinking .nova-eye {
-  transform: translateY(1px) scaleY(0.8);
+.nova-happy .nova-glow {
+  background:
+    rgba(53, 208, 127, 0.17);
+
+  transform:
+    scale(1.08);
+}
+
+.nova-happy .nova-eye {
+  width: 11px;
+  height: 11px;
+
+  background:
+    #f0efff;
+}
+
+.nova-happy .nova-brow-left {
+  transform:
+    rotate(-7deg)
+    translateY(-1px);
+}
+
+.nova-happy .nova-brow-right {
+  transform:
+    rotate(7deg)
+    translateY(-1px);
+}
+
+.nova-happy .nova-mouth {
+  width: 19px;
+  height: 9px;
+
+  bottom: 6px;
+
+  border-bottom:
+    2px solid #e4e1ff;
+
+  border-radius:
+    0 0 16px 16px;
+}
+
+.nova-happy .nova-core-dot {
+  background: #35d07f;
+
+  box-shadow:
+    0 0 12px
+      rgba(53, 208, 127, 0.9);
+}
+
+.nova-happy .nova-base-light {
+  width: 24px;
+
+  background: #35d07f;
+
+  box-shadow:
+    0 0 12px
+      rgba(53, 208, 127, 0.85);
+}
+
+/* =========================================================
+   🤔 THINKING
+========================================================= */
+
+.nova-thinking .nova-glow {
+  background:
+    rgba(143, 131, 255, 0.18);
+
+  transform:
+    scale(1.04);
+}
+
+.nova-thinking .nova-brow-left {
+  transform:
+    rotate(-12deg)
+    translateY(-1px);
+}
+
+.nova-thinking .nova-brow-right {
+  transform:
+    rotate(7deg)
+    translateY(2px);
+}
+
+.nova-thinking
+  .nova-eye-left
+  .nova-pupil {
+  transform:
+    translate(
+      -30%,
+      -65%
+    );
+}
+
+.nova-thinking
+  .nova-eye-right
+  .nova-pupil {
+  transform:
+    translate(
+      -20%,
+      -65%
+    );
 }
 
 .nova-thinking .nova-mouth {
-  width: 9px;
+  width: 12px;
   height: 2px;
-  border-bottom-width: 2px;
-  border-radius: 0;
+
+  bottom: 9px;
+
+  border-bottom:
+    2px solid
+      rgba(220, 217, 255, 0.8);
+
+  border-radius:
+    0;
 }
+
+.nova-thinking .nova-arm-right {
+  transform:
+    rotate(-28deg);
+}
+
+.nova-thinking .nova-core-dot {
+  animation:
+    nova-thinking-pulse 1.4s ease-in-out infinite;
+}
+
+/* =========================================================
+   ⚠️ ALERT
+========================================================= */
 
 .nova-alert .nova-glow {
-  background: rgba(255, 109, 135, 0.15);
-  transform: scale(1.1);
+  background:
+    rgba(255, 109, 135, 0.2);
+
+  transform:
+    scale(1.12);
 }
 
-.nova-alert .nova-base-light {
-  background: #ff6d87;
-  box-shadow: 0 0 10px rgba(255, 109, 135, 0.8);
+.nova-alert .nova-head {
+  border-color:
+    rgba(255, 109, 135, 0.35);
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.08),
+    0 10px 25px
+      rgba(255, 73, 105, 0.18);
+}
+
+.nova-alert .nova-eye {
+  width: 12px;
+  height: 12px;
+
+  background:
+    #fff4f6;
+
+  box-shadow:
+    0 0 10px
+      rgba(255, 109, 135, 0.85),
+    0 0 20px
+      rgba(255, 109, 135, 0.4);
+}
+
+.nova-alert .nova-brow {
+  background:
+    #ffc5ce;
+}
+
+.nova-alert .nova-brow-left {
+  transform:
+    rotate(10deg)
+    translateY(-3px);
+}
+
+.nova-alert .nova-brow-right {
+  transform:
+    rotate(-10deg)
+    translateY(-3px);
+}
+
+.nova-alert .nova-mouth {
+  width: 9px;
+  height: 9px;
+
+  bottom: 6px;
+
+  border:
+    2px solid
+      rgba(255, 220, 225, 0.9);
+
+  border-radius: 50%;
 }
 
 .nova-alert .nova-head-line {
   background: #ff6d87;
-  box-shadow: 0 0 10px rgba(255, 109, 135, 0.7);
+
+  box-shadow:
+    0 0 12px
+      rgba(255, 109, 135, 0.85);
 }
 
-.nova-happy .nova-mouth {
-  width: 17px;
-  height: 7px;
+.nova-alert .nova-core-dot {
+  background: #ff6d87;
+
+  box-shadow:
+    0 0 14px
+      rgba(255, 109, 135, 0.95);
+
+  animation:
+    nova-alert-pulse 0.9s ease-in-out infinite;
 }
 
-.nova-happy .nova-glow {
-  background: rgba(53, 208, 127, 0.13);
+.nova-alert .nova-base-light {
+  width: 25px;
+
+  background: #ff6d87;
+
+  box-shadow:
+    0 0 13px
+      rgba(255, 109, 135, 0.95);
 }
 
-.nova-happy .nova-base-light {
-  background: #35d07f;
-  box-shadow: 0 0 10px rgba(53, 208, 127, 0.75);
+/* =========================================================
+   😐 NEUTRAL
+========================================================= */
+
+.nova-neutral .nova-mouth {
+  width: 11px;
+  height: 2px;
+
+  bottom: 8px;
+
+  border-bottom:
+    2px solid
+      rgba(220, 217, 255, 0.7);
+
+  border-radius: 999px;
 }
 
 /* =========================================================
@@ -579,36 +935,46 @@
 @keyframes nova-character-in {
   from {
     opacity: 0;
-    transform: translateY(14px) scale(0.96);
+    transform:
+      translateY(14px)
+      scale(0.96);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform:
+      translateY(0)
+      scale(1);
   }
 }
 
 @keyframes nova-message-in {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform:
+      translateY(8px)
+      scale(0.98);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform:
+      translateY(0)
+      scale(1);
   }
 }
 
 @keyframes nova-name-in {
   from {
     opacity: 0;
-    transform: translateY(5px);
+    transform:
+      translateY(5px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform:
+      translateY(0);
   }
 }
 
@@ -639,6 +1005,32 @@
   }
 }
 
+@keyframes nova-thinking-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes nova-alert-pulse {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: scale(1.45);
+    opacity: 1;
+  }
+}
+
 /* =========================================================
    RESPONSIVE
 ========================================================= */
@@ -651,7 +1043,8 @@
   }
 
   .nova-message {
-    padding: 11px 13px 11px 15px;
+    padding:
+      11px 13px 11px 15px;
   }
 
   .nova-message-text {
@@ -659,8 +1052,11 @@
   }
 
   .nova-character {
-    transform: scale(0.9);
-    transform-origin: bottom right;
+    transform:
+      scale(0.9);
+
+    transform-origin:
+      bottom right;
   }
 
   .nova-nameplate {
@@ -674,8 +1070,11 @@
   }
 
   .nova-character {
-    transform: scale(0.78);
-    transform-origin: bottom right;
+    transform:
+      scale(0.78);
+
+    transform-origin:
+      bottom right;
   }
 
   .nova-message-text {

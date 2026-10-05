@@ -1,0 +1,18 @@
+/* =========================================================
+   THINKTANK — AppDecor neutral layer
+   IMPORTANT:
+   This file intentionally contains NO visual theme.
+   App.css + round-specific CSS control the UI.
+========================================================= */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
